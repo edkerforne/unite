@@ -38,15 +38,28 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
-    let result;
-    
-    return result;
+    const unitMap = {
+      'gal': 'l',
+      'l': 'gal',
+      'mi': 'km',
+      'km': 'mi',
+      'lbs': 'kg',
+      'kg': 'lbs'
+    };
+    return unitMap[initUnit];
   };
 
   this.spellOutUnit = function(unit) {
-    let result;
+    const spellOutMap = {
+      'gal': 'gallons',
+      'l': 'liters',
+      'mi': 'miles',
+      'km': 'kilometers',
+      'lbs': 'pounds',
+      'kg': 'kilograms'
+    };
     
-    return result;
+    return spellOutMap[unit];
   };
   
   this.convert = function(initNum, initUnit) {
