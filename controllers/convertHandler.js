@@ -13,28 +13,30 @@ function ConvertHandler() {
 
   this.getNum = function(input) {
     if (!input.match(numRegex)) return 1;
-    let stripped = input.replace(unitRegex, ''); // strip units
+    const stripped = input.replace(unitRegex, ''); // strip units
 
     if (!stripped.match(/\//)) {
-      return +stripped ? (+stripped).toFixed(5).toString() : 'Invalid number';
+      return +stripped ? +(+stripped).toFixed(5) : 'Invalid number';
     } else {
       // handle fractions
       const numbers = stripped.split('/');
       if (numbers.length === 2) {
-        return (numbers[0] / numbers[1]).toFixed(5).toString();
+        return (numbers[0] / numbers[1]).toFixed(5);
       } else {
-        return 'Invalid fraction';
+        return 'Invalid number';
       }
     }
   };
   
   this.getUnit = function(input) {
     const validUnits = ['gal','l','mi','km','lbs','kg'];
-    const inputUnit = input.match(unitRegex)[0].trim().toLowerCase();
-    for (let elem of validUnits) {
-      if (inputUnit === elem) return inputUnit;
-    };
-    return 'Invalid unit';
+    if (input.match(unitRegex)) {
+      const inputUnit = input.match(unitRegex)[0].trim().toLowerCase();
+      for (let elem of validUnits) {
+        if (inputUnit === elem) return inputUnit;
+      };
+    }
+      return 'Invalid unit';
   };
   
   this.getReturnUnit = function(initUnit) {
@@ -92,13 +94,11 @@ function ConvertHandler() {
         break;
     }
     
-    return result;
+    return +((+result).toFixed(5));
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result;
-    
-    return result;
+    return `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
   };
   
 }

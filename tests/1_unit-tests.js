@@ -42,7 +42,7 @@ suite('Unit Tests', function(){
     
     test('Invalid Input (double fraction)', function(done) {
       const input = '3/4/5km';
-      assert.equal(convertHandler.getNum(input), 'Invalid fraction');
+      assert.equal(convertHandler.getNum(input), 'Invalid number');
       done();
     });
     
